@@ -9,7 +9,7 @@
             var audioUrl = $(this).find('a:first').attr('href');
             var $player = $('<audio controls="controls" preload="metadata">'
                           + '    <source src="' + audioUrl + '" type="audio/mp3" />' // TODO support ogg
-                          + '</audio>');
+                          + '</audio><br/>');
 
             $player.bookmarks = {};
 
@@ -18,7 +18,7 @@
              */
 
           //  $player.appendTo(this); return;
-            $player.appendTo(this).bind('timeupdate', function() {
+            $player.prependTo(this).bind('timeupdate', function() {
                 var currentTime = $player.get(0).currentTime;
 
                 $.each($player.bookmarks, function(index, element) {
@@ -51,7 +51,7 @@
                      $(this).html().trim()
                  );
                  $player.get(0).currentTime = seconds;
-             });
+             }).attr('title', 'Click to skip to this timecode');
         },
 
         /*
